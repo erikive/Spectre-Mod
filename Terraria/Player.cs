@@ -2858,19 +2858,19 @@ namespace Terraria
                         this.statLife--;
                         if (this.statLife <= 0 && this.whoAmi == Main.myPlayer)
                         {
-                            if (this.poisoned)
+                            if (this.poisoned && Spectre.immunetoDeBuffs)
                             {
                                 this.KillMe(10.0, 0, false, " " + Lang.dt[0]);
                             }
                             else
                             {
-                                if (this.onFire)
+                                if (this.onFire && Spectre.immunetoDeBuffs)
                                 {
                                     this.KillMe(10.0, 0, false, " " + Lang.dt[1]);
                                 }
                                 else
                                 {
-                                    if (this.onFire2)
+                                    if (this.onFire2 && Spectre.immunetoDeBuffs)
                                     {
                                         this.KillMe(10.0, 0, false, " " + Lang.dt[1]);
                                     }

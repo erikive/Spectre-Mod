@@ -18,6 +18,7 @@ namespace Terraria
         public static bool showUI = true;
         public static string lastCommand = "";
         public static bool FullBright = false;
+        public static bool immunetoDeBuffs = true;
         public static float LightLevel = 0.8f;
         public static bool infItems = true;
         public static int cblue = 0xff;
@@ -481,6 +482,21 @@ namespace Terraria
                                 }
                             }
                             catch { }
+                            break;
+                        }
+
+                    case "debuff":
+                        {
+                            if (immunetoDeBuffs)
+                            {
+                                immunetoDeBuffs = false;
+                                Main.NewText("Immune to debuff mode deactivated.", 255, 195, 0);
+                            }
+                            else
+                            {
+                                immunetoDeBuffs = true;
+                                Main.NewText("Immune to debuff mode activated.", 255, 195, 0);
+                            }
                             break;
                         }
 
