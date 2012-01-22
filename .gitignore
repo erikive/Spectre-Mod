@@ -4,8 +4,11 @@
 *.class
 *.dll
 *.exe
+*.exe.manifest
+*.vshost.exe
 *.o
 *.so
+client-crashlog.txt
 bin/Release/*
 obj/*
 
