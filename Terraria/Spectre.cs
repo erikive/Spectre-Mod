@@ -503,8 +503,7 @@ namespace Terraria
                     case "usetime":
                     case "ut":
                         {
-                            int usetime;
-                            int.TryParse(parameter, out usetime);
+                            int usetime = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
                             Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
                             break;
@@ -513,10 +512,24 @@ namespace Terraria
                     case "ss":
                     case "shootspeed":
                         {
-                            int shootspeed;
-                            int.TryParse(parameter, out shootspeed);
+                            int shootspeed = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
                             Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "shoot":
+                        {
+                            int shoot = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
+                            if (Main.projectile[shoot].name == null)
+                            {
+                                Main.NewText("No such item.", 255, 195, 0);
+                            }
+                            else
+                            {
+                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + ".", 255, 195, 0);
+                            }
                             break;
                         }
 
