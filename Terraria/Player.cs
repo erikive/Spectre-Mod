@@ -1719,7 +1719,7 @@ namespace Terraria
                     }
                     for (int m = 0; m < 10; m++)
                     {
-                        if (DarkMod.Bunny)
+                        if (Spectre.Bunny)
                         {
                             this.buffTime[m] = 18000;
                             this.bunny = true;

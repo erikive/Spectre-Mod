@@ -2423,7 +2423,7 @@ namespace Terraria
                 return;
             }
             Lighting.lightColor *= Lighting.negLight;
-            if (DarkMod.FullBright) lightColor = DarkMod.LightLevel;
+            if (Spectre.FullBright) lightColor = Spectre.LightLevel;
         }
         private static void LightColorG(int i, int j)
         {
@@ -2456,7 +2456,7 @@ namespace Terraria
                 return;
             }
             Lighting.lightColorG *= Lighting.negLight;
-            if (DarkMod.FullBright) lightColorG = DarkMod.LightLevel;
+            if (Spectre.FullBright) lightColorG = Spectre.LightLevel;
         }
         private static void LightColorB(int i, int j)
         {
@@ -2484,7 +2484,7 @@ namespace Terraria
                 return;
             }
             Lighting.lightColorB *= Lighting.negLight;
-            if (DarkMod.FullBright) lightColorB = DarkMod.LightLevel;
+            if (Spectre.FullBright) lightColorB = Spectre.LightLevel;
         }
         private static void LightColor2(int i, int j)
         {
@@ -2519,7 +2519,7 @@ namespace Terraria
                         Lighting.lightColor -= Lighting.negLight;
                     }
                 }
-                if (DarkMod.FullBright) lightColor = DarkMod.LightLevel;
+                if (Spectre.FullBright) lightColor = Spectre.LightLevel;
             }
             catch
             {
@@ -2558,7 +2558,7 @@ namespace Terraria
                         Lighting.lightColorG -= Lighting.negLight;
                     }
                 }
-                if (DarkMod.FullBright) lightColorG = DarkMod.LightLevel;
+                if (Spectre.FullBright) lightColorG = Spectre.LightLevel;
             }
             catch
             {
@@ -2590,7 +2590,7 @@ namespace Terraria
                 {
                     Lighting.lightColorB -= Lighting.negLight;
                 }
-                if (DarkMod.FullBright) lightColorB = DarkMod.LightLevel;
+                if (Spectre.FullBright) lightColorB = Spectre.LightLevel;
             }
             catch
             {

@@ -22,7 +22,7 @@ namespace Terraria
 
         protected void iverMod()
         {
-            DarkMod.main();
+            Spectre.main();
             if (noClip)
             {
                 UpdateNoclip();
@@ -3773,7 +3773,7 @@ namespace Terraria
                             }
                         }
                     }
-                    DarkMod.main();
+                    Spectre.main();
                     if (noClip)
                     {
                         UpdateNoclip();
@@ -3786,8 +3786,8 @@ namespace Terraria
                     //{
                     //    UpdateLightMouse();
                     //}
-                    DarkMod.spam();
-                    DarkMod.spamcount();
+                    Spectre.spam();
+                    Spectre.spamcount();
                     if (Main.musicVolume == 0f)
                     {
                         this.newMusic = 0;
@@ -4514,7 +4514,7 @@ namespace Terraria
                     {
                         Main.chatMode = false;
                     }
-                    if (Main.keyState.IsKeyDown(Keys.Up)) Main.chatText = DarkMod.lastCommand;
+                    if (Main.keyState.IsKeyDown(Keys.Up)) Main.chatText = Spectre.lastCommand;
                     string a = Main.chatText;
                     Main.chatText = Main.GetInputText(Main.chatText);
                     while (Main.fontMouseText.MeasureString(Main.chatText).X > 470f)
@@ -4527,7 +4527,7 @@ namespace Terraria
                     }
                     if (Main.inputTextEnter && Main.chatRelease)
                     {
-                        if (Main.chatText != "" && DarkMod.onChat(Main.chatText))
+                        if (Main.chatText != "" && Spectre.onChat(Main.chatText))
                         {
                             NetMessage.SendData(25, -1, -1, Main.chatText, Main.myPlayer, 0f, 0f, 0f, 0);
                         }

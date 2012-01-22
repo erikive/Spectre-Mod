@@ -44,7 +44,7 @@
     <Compile Include="Terraria\Cloud.cs" />
     <Compile Include="Terraria\Collision.cs" />
     <Compile Include="Terraria\CombatText.cs" />
-    <Compile Include="Terraria\DarkMod.cs" />
+    <Compile Include="Terraria\Spectre.cs" />
     <Compile Include="Terraria\Dust.cs" />
     <Compile Include="Terraria\WorldGen.cs" />
     <Compile Include="Terraria\Tile.cs" />
