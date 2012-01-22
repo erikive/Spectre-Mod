@@ -1852,31 +1852,31 @@ namespace Terraria
                                                                                                 }
                                                                                                 else
                                                                                                 {
-                                                                                                    if (this.buffType[m] == 30)
+                                                                                                    if (this.buffType[m] == 30 && !Spectre.immunetoDeBuffs)
                                                                                                     {
                                                                                                         this.bleed = true;
                                                                                                     }
                                                                                                     else
                                                                                                     {
-                                                                                                        if (this.buffType[m] == 31)
+                                                                                                        if (this.buffType[m] == 31 && !Spectre.immunetoDeBuffs)
                                                                                                         {
                                                                                                             this.confused = true;
                                                                                                         }
                                                                                                         else
                                                                                                         {
-                                                                                                            if (this.buffType[m] == 32)
+                                                                                                            if (this.buffType[m] == 32 && !Spectre.immunetoDeBuffs)
                                                                                                             {
                                                                                                                 this.slow = true;
                                                                                                             }
                                                                                                             else
                                                                                                             {
-                                                                                                                if (this.buffType[m] == 35)
+                                                                                                                if (this.buffType[m] == 35 && !Spectre.immunetoDeBuffs)
                                                                                                                 {
                                                                                                                     this.silence = true;
                                                                                                                 }
                                                                                                                 else
                                                                                                                 {
-                                                                                                                    if (this.buffType[m] == 36)
+                                                                                                                    if (this.buffType[m] == 36 && !Spectre.immunetoDeBuffs)
                                                                                                                     {
                                                                                                                         this.brokenArmor = true;
                                                                                                                     }
@@ -1980,37 +1980,37 @@ namespace Terraria
                                                                                                                                         }
                                                                                                                                         else
                                                                                                                                         {
-                                                                                                                                            if (this.buffType[m] == 20)
+                                                                                                                                            if (this.buffType[m] == 20 && !Spectre.immunetoDeBuffs)
                                                                                                                                             {
                                                                                                                                                 this.poisoned = true;
                                                                                                                                             }
                                                                                                                                             else
                                                                                                                                             {
-                                                                                                                                                if (this.buffType[m] == 21)
+                                                                                                                                                if (this.buffType[m] == 21 && !Spectre.immunetoDeBuffs)
                                                                                                                                                 {
                                                                                                                                                     this.potionDelay = this.buffTime[m];
                                                                                                                                                 }
                                                                                                                                                 else
                                                                                                                                                 {
-                                                                                                                                                    if (this.buffType[m] == 22)
+                                                                                                                                                    if (this.buffType[m] == 22 && !Spectre.immunetoDeBuffs)
                                                                                                                                                     {
                                                                                                                                                         this.blind = true;
                                                                                                                                                     }
                                                                                                                                                     else
                                                                                                                                                     {
-                                                                                                                                                        if (this.buffType[m] == 23)
+                                                                                                                                                        if (this.buffType[m] == 23 && !Spectre.immunetoDeBuffs)
                                                                                                                                                         {
                                                                                                                                                             this.noItems = true;
                                                                                                                                                         }
                                                                                                                                                         else
                                                                                                                                                         {
-                                                                                                                                                            if (this.buffType[m] == 24)
+                                                                                                                                                            if (this.buffType[m] == 24 && !Spectre.immunetoDeBuffs)
                                                                                                                                                             {
                                                                                                                                                                 this.onFire = true;
                                                                                                                                                             }
                                                                                                                                                             else
                                                                                                                                                             {
-                                                                                                                                                                if (this.buffType[m] == 39)
+                                                                                                                                                                if (this.buffType[m] == 39 && !Spectre.immunetoDeBuffs)
                                                                                                                                                                 {
                                                                                                                                                                     this.onFire2 = true;
                                                                                                                                                                 }
@@ -2858,19 +2858,19 @@ namespace Terraria
                         this.statLife--;
                         if (this.statLife <= 0 && this.whoAmi == Main.myPlayer)
                         {
-                            if (this.poisoned && Spectre.immunetoDeBuffs)
+                            if (this.poisoned)
                             {
                                 this.KillMe(10.0, 0, false, " " + Lang.dt[0]);
                             }
                             else
                             {
-                                if (this.onFire && Spectre.immunetoDeBuffs)
+                                if (this.onFire)
                                 {
                                     this.KillMe(10.0, 0, false, " " + Lang.dt[1]);
                                 }
                                 else
                                 {
-                                    if (this.onFire2 && Spectre.immunetoDeBuffs)
+                                    if (this.onFire2)
                                     {
                                         this.KillMe(10.0, 0, false, " " + Lang.dt[1]);
                                     }
