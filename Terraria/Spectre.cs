@@ -518,17 +518,25 @@ namespace Terraria
                             break;
                         }
 
+                    case "damage":
+                        {
+                            int damage = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = damage;
+                            Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
+                            break;
+                        }
+
                     case "shoot":
                         {
                             int shoot = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
-                            if (Main.projectile[shoot].name == null)
+                            if (Main.projectile[shoot].type == null)
                             {
                                 Main.NewText("No such item.", 255, 195, 0);
                             }
                             else
                             {
-                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + ".", 255, 195, 0);
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
+                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[(shoot + 1)].name + "s.", 255, 195, 0);
                             }
                             break;
                         }
