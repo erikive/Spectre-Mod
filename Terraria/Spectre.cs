@@ -703,11 +703,18 @@ namespace Terraria
                             break;
                         }
 
-                    case "seltype":
+                    case "tiletype":
                     case "type":
                         {
                             tileType = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.NewText("Changing tiletype to " + tileType, 255, 195, 0);
+                            break;
+                        }
+
+                    case "walltype":
+                        {
+                            wallType = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.NewText("Changing walltype to " + tileType, 255, 195, 0);
                             break;
                         }
 
