@@ -1,5 +1,0 @@
-C:\Users\Erik\Desktop\Terraria v1.1.2\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Erik\Desktop\Terraria v1.1.2\bin\Release\Terraria v1.1.2.exe
-C:\Users\Erik\Desktop\Terraria v1.1.2\bin\Release\Terraria v1.1.2.pdb
-C:\Users\Erik\Desktop\Terraria v1.1.2\obj\x86\Release\Terraria v1.1.2.exe
-C:\Users\Erik\Desktop\Terraria v1.1.2\obj\x86\Release\Terraria v1.1.2.pdb
