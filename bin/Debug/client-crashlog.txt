@@ -1,0 +1,6 @@
+1/21/2012 7:32:34 PM
+System.DllNotFoundException: Unable to load DLL 'steam_api.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+   at Terraria.Steam.SteamAPI_Init()
+   at Terraria.Steam.Init() in C:\Users\Erik\Desktop\Terraria v1.1.2\Terraria\Steam.cs:line 14
+   at Terraria.Program.Main(String[] args) in C:\Users\Erik\Desktop\Terraria v1.1.2\Terraria\Program.cs:line 56
+
