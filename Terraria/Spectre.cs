@@ -11,7 +11,7 @@ namespace Terraria
     class Spectre
     {
         public static bool addWalls = false;
-        public static bool Bunny = true;
+        public static bool Bunny = false;
         public static bool addTiles = false;
         public static int tileType = 0;
         public static int wallType = 30;
@@ -500,16 +500,54 @@ namespace Terraria
                             break;
                         }
 
+                    case "usetime":
+                    case "ut":
+                        {
+                            int usetime;
+                            int.TryParse(parameter, out usetime);
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
+                            Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "ss":
+                    case "shootspeed":
+                        {
+                            int shootspeed;
+                            int.TryParse(parameter, out shootspeed);
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
+                            Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "autoreuse":
+                    case "ar":
+                        {
+                            if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
+                            }
+                            else
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
+                            }
+                            break;
+                        }
+
                     case "bunny":
                         {
                             if (Bunny)
                             {
                                 Bunny = false;
+                                Main.player[Main.myPlayer].bunny = false;
+                                //Main.player[Main.myPlayer].DelBuff(40);
                                 Main.NewText("Bunny deactivated.", 255, 195, 0);
                             }
                             else
                             {
                                 Bunny = true;
+                                Main.player[Main.myPlayer].bunny = true;
+                                //Main.player[Main.myPlayer].AddBuff(40, 999999, true);
                                 Main.NewText("Bunny activated.", 255, 195, 0);
                             }
                             break;
@@ -541,20 +579,22 @@ namespace Terraria
                     //        hellwall = true;
                     //        Main.NewText("Hell Wall Activated.", 255, 195, 0);
                     //    }
-                    //    goto Break;
+                    //    Break;
 
-                    //case "ghost":
-                    //    if (Ghost)
-                    //    {
-                    //        Ghost = false;
-                    //        Main.NewText("You are no longer a ghost.", 255, 195, 0);
-                    //    }
-                    //    else
-                    //    {
-                    //        Ghost = true;
-                    //        Main.NewText("You are now a ghost.", 255, 195, 0);
-                    //    }
-                    //    goto Break;
+                    case "ghost":
+                        {
+                            if (Ghost)
+                            {
+                                Ghost = false;
+                                Main.NewText("You are no longer a ghost.", 255, 195, 0);
+                            }
+                            else
+                            {
+                                Ghost = true;
+                                Main.NewText("You are now a ghost.", 255, 195, 0);
+                            }
+                            break;
+                        }
 
                     case "noclip":
                         {

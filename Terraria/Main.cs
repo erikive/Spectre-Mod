@@ -1136,7 +1136,14 @@ namespace Terraria
                 registryKey = registryKey.CreateSubKey("Software\\Terraria");
                 if (registryKey != null && registryKey.GetValue("Bunny") != null && registryKey.GetValue("Bunny").ToString() == "1")
                 {
-                    Main.cEd = true;
+                //    if (Spectre.Bunny)
+                //    {
+                //        Main.cEd = true;
+                //    }
+                //    else
+                //    {
+                        Main.cEd = false;
+                    //}
                 }
             }
             catch

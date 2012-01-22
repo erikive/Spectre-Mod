@@ -1719,24 +1719,6 @@ namespace Terraria
                     }
                     for (int m = 0; m < 10; m++)
                     {
-                        if (Spectre.Bunny)
-                        {
-                            this.buffTime[m] = 18000;
-                            this.bunny = true;
-                            bool flag8 = true;
-                            for (int num24 = 0; num24 < 1000; num24++)
-                            {
-                                if (Main.projectile[num24].active && Main.projectile[num24].owner == this.whoAmi && Main.projectile[num24].type == 111)
-                                {
-                                    flag8 = false;
-                                    break;
-                                }
-                            }
-                            if (flag8)
-                            {
-                                Projectile.NewProjectile(this.position.X + (float)(this.width / 2), this.position.Y + (float)(this.height / 2), 0f, 0f, 111, 0, 0f, this.whoAmi);
-                            }
-                        }
                         if (this.buffType[m] > 0 && this.buffTime[m] > 0)
                         {
                             if (this.whoAmi == Main.myPlayer && this.buffType[m] != 28)
