@@ -8,6 +8,8 @@
 *.vshost.exe
 *.o
 *.so
+*.gitignore
+binaries/content/*
 client-crashlog.txt
 bin/Release/*
 obj/*
