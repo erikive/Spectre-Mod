@@ -9,8 +9,8 @@
 *.o
 *.so
 client-crashlog.txt
-bin/Release/*
-obj/*
+bin/Release/
+obj/
 
 # Packages #
 ############
