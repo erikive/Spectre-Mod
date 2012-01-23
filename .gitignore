@@ -8,7 +8,6 @@
 *.vshost.exe
 *.o
 *.so
-binaries/content/
 client-crashlog.txt
 bin/Release/
 obj/
