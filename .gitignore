@@ -8,11 +8,10 @@
 *.vshost.exe
 *.o
 *.so
-*.gitignore
-binaries/content/*
+binaries/content/
 client-crashlog.txt
-bin/Release/*
-obj/*
+bin/Release/
+obj/
 
 # Packages #
 ############
