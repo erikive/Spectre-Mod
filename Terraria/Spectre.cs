@@ -391,30 +391,30 @@ namespace Terraria
                 }
                 switch (str)
                 {
-                    case "give":
-                    case "item":
-                    case "i":
-                        {
-                            var newItem = new Item();
-                            newItem.SetDefaults(parameter);
-                            newItem.stack = count;
+                    //case "give":
+                    //case "item":
+                    //case "i":
+                    //    {
+                    //        int type = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                    //        var newItem = new Item();
+                    //        newItem.SetDefaults(parameter);
+                    //        newItem.stack = count;
 
-                            var chat = "Giving " + Main.player[Main.myPlayer].name + " " + count + "x " + parameter + ".";
-                            NetMessage.SendData(0x19, -1, -1, chat, Main.myPlayer, 0f, 0f, 0f);
-
-                            //While loop used to make sure you dont have a stack that exceeds the stack limit
-                            while (count > newItem.maxStack)
-                            {
-                                newItem.stack = newItem.maxStack;
-                                Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
-                                count = count - newItem.maxStack;
-                                newItem = new Item();
-                                newItem.SetDefaults(parameter);
-                            }
-                            newItem.stack = count;
-                            Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
-                            break;
-                        }
+                    //        var chat = "Giving " + Main.player[Main.myPlayer].name + " " + count + "x " + parameter + ".";
+                    //        //NetMessage.SendData(0x19, -1, -1, chat, Main.myPlayer, 0f, 0f, 0f);
+                    //        Main.NewText(chat, 255, 195, 0);
+                    //        while (count > newItem.maxStack)
+                    //        {
+                    //            newItem.stack = newItem.maxStack;
+                    //            Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
+                    //            count = count - newItem.maxStack;
+                    //            newItem = new Item();
+                    //            newItem.SetDefaults(parameter);
+                    //        }
+                    //        newItem.stack = count;
+                    //        Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
+                    //        break;
+                    //    }
 
 
                     //case "aimbot":
@@ -441,14 +441,6 @@ namespace Terraria
                     //        Main.mouseLight = false;
                     //        Main.NewText("Light mouse deactivated.", 255, 195, 0);
                     //    }
-                    //    goto Break;
-
-                    //case "dirt":
-                    //    if (!(parameter == "on"))
-                    //    {
-                    //        debugLeftClick = "";
-                    //    }
-                    //    debugLeftClick = "adddirt";
                     //    goto Break;
 
                     case "killall":
@@ -500,77 +492,87 @@ namespace Terraria
                             break;
                         }
 
-                    case "usetime":
-                    case "ut":
+                    case "item":
+                    case "i":
                         {
-                            int usetime = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
-                            Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
-                            break;
-                        }
-
-                    case "ss":
-                    case "shootspeed":
-                        {
-                            int shootspeed = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
-                            Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
-                            break;
-                        }
-
-                    case "damage":
-                        {
-                            int damage = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = damage;
-                            Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
-                            break;
-                        }
-
-                    case "shoot":
-                        {
-                            int shoot = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            if (Main.projectile[shoot].type == null)
+                            string text1 = text.Substring(text.LastIndexOf(' ') + 1);
+                            int num1 = IndexOfOccurence(text, " ", 2);
+                            switch (text1)
                             {
-                                Main.NewText("No such item.", 255, 195, 0);
-                            }
-                            else
-                            {
-                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
-                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[(shoot + 1)].name + "s.", 255, 195, 0);
-                            }
-                            break;
-                        }
+                                case "usetime":
+                                case "ut":
+                                    {
+                                        int usetime = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = num1;
+                                        Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
+                                        break;
+                                    }
 
-                    case "autoreuse":
-                    case "ar":
-                        {
-                            if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
-                            {
-                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
-                            }
-                            else
-                            {
-                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
+                                case "ss":
+                                case "shootspeed":
+                                    {
+                                        int shootspeed = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = num1;
+                                        Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
+                                        break;
+                                    }
+
+                                case "damage":
+                                    {
+                                        int damage = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = num1;
+                                        Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
+                                        break;
+                                    }
+
+                                case "shoot":
+                                    {
+                                        int shoot = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
+                                        if (Main.projectile[shoot].name == null)
+                                        {
+                                            Main.NewText("No such item.", 255, 195, 0);
+                                        }
+                                        else
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = num1;
+                                            Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[num1].name + "s.", 255, 195, 0);
+                                        }
+                                        break;
+                                    }
+
+                                case "autoreuse":
+                                case "ar":
+                                    {
+                                        if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
+                                        }
+                                        else
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
+                                        }
+                                        break;
+                                    }
                             }
                             break;
                         }
 
                     case "bunny":
                         {
-                            if (Bunny)
-                            {
-                                Bunny = false;
-                                Main.player[Main.myPlayer].bunny = false;
-                                //Main.player[Main.myPlayer].DelBuff(40);
-                                Main.NewText("Bunny deactivated.", 255, 195, 0);
-                            }
-                            else
-                            {
-                                Bunny = true;
-                                Main.player[Main.myPlayer].bunny = true;
-                                //Main.player[Main.myPlayer].AddBuff(40, 999999, true);
+                            //if (Bunny)
+                            //{
+                            //    Bunny = false;
+                            //    //Main.player[Main.myPlayer].bunny = false;
+                            //    Main.player[Main.myPlayer].DelBuff(40);
+                            //    Main.NewText("Bunny deactivated.", 255, 195, 0);
+                            //}
+                            //else
+                            //{
+                            //    Bunny = true;
+                            //    //Main.player[Main.myPlayer].bunny = true;
+                                Main.player[Main.myPlayer].AddBuff(40, 999999, false);
                                 Main.NewText("Bunny activated.", 255, 195, 0);
-                            }
+                            //}
                             break;
                         }
 
