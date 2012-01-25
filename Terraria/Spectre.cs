@@ -491,88 +491,80 @@ namespace Terraria
                             }
                             break;
                         }
-
-                    case "item":
-                    case "i":
+                    case "usetime":
+                    case "ut":
                         {
-                            string text1 = text.Substring(text.LastIndexOf(' ') + 1);
-                            int num1 = IndexOfOccurence(text, " ", 2);
-                            switch (text1)
+                            int usetime = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
+                            Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "ss":
+                    case "shootspeed":
+                        {
+                            int shootspeed = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
+                            Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "damage":
+                        {
+                            int damage = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = damage;
+                            Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
+                            break;
+                        }
+
+                    case "shoot":
+                        {
+                            int shoot = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            if (Main.projectile[shoot].name == null)
                             {
-                                case "usetime":
-                                case "ut":
-                                    {
-                                        int usetime = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
-                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = num1;
-                                        Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
-                                        break;
-                                    }
+                                Main.NewText("No such item.", 255, 195, 0);
+                            }
+                            else
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
+                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + "s.", 255, 195, 0);
+                            }
+                            break;
+                        }
 
-                                case "ss":
-                                case "shootspeed":
-                                    {
-                                        int shootspeed = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
-                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = num1;
-                                        Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
-                                        break;
-                                    }
+                    case "autoreuse":
+                    case "ar":
+                        {
+                            if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
+                            }
+                            else
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
+                            }
+                            break;
+                        }
 
-                                case "damage":
-                                    {
-                                        int damage = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
-                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = num1;
-                                        Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
-                                        break;
-                                    }
-
-                                case "shoot":
-                                    {
-                                        int shoot = int.Parse(text1.Substring(text1.LastIndexOf(' ') + 1));
-                                        if (Main.projectile[shoot].name == null)
-                                        {
-                                            Main.NewText("No such item.", 255, 195, 0);
-                                        }
-                                        else
-                                        {
-                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = num1;
-                                            Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[num1].name + "s.", 255, 195, 0);
-                                        }
-                                        break;
-                                    }
-
-                                case "autoreuse":
-                                case "ar":
-                                    {
-                                        if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
-                                        {
-                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
-                                        }
-                                        else
-                                        {
-                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
-                                        }
-                                        break;
-                                    }
+                    case "inf":
+                    case "infitems":
+                    case "infitem":
+                        {
+                            if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].consumable)
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].consumable = false;
+                            }
+                            else
+                            {
+                                Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].consumable = true;
                             }
                             break;
                         }
 
                     case "bunny":
                         {
-                            //if (Bunny)
-                            //{
-                            //    Bunny = false;
-                            //    //Main.player[Main.myPlayer].bunny = false;
-                            //    Main.player[Main.myPlayer].DelBuff(40);
-                            //    Main.NewText("Bunny deactivated.", 255, 195, 0);
-                            //}
-                            //else
-                            //{
-                            //    Bunny = true;
-                            //    //Main.player[Main.myPlayer].bunny = true;
-                                Main.player[Main.myPlayer].AddBuff(40, 999999, false);
-                                Main.NewText("Bunny activated.", 255, 195, 0);
-                            //}
+                            Main.player[Main.myPlayer].AddBuff(40, 999999, false);
+                            Main.NewText("Bunny activated.", 255, 195, 0);
                             break;
                         }
 
@@ -590,19 +582,6 @@ namespace Terraria
                             }
                             break;
                         }
-
-                    //case "hellwall":
-                    //    if (hellwall)
-                    //    {
-                    //        hellwall = false;
-                    //        Main.NewText("Hell Wall Deactivated.", 255, 195, 0);
-                    //    }
-                    //    else
-                    //    {
-                    //        hellwall = true;
-                    //        Main.NewText("Hell Wall Activated.", 255, 195, 0);
-                    //    }
-                    //    Break;
 
                     case "ghost":
                         {
@@ -811,21 +790,6 @@ namespace Terraria
                             break;
                         }
 
-                    case "infitems":
-                        {
-                            if (infItems)
-                            {
-                                infItems = false;
-                                Main.NewText("Infinite Items mode off.", 255, 195, 0);
-                            }
-                            else
-                            {
-                                infItems = true;
-                                Main.NewText("Infinite Items mode on.", 255, 195, 0);
-                            }
-                            break;
-                        }
-
                     case "speed":
                         {
                             time = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
@@ -893,19 +857,6 @@ namespace Terraria
                             break;
                         }
 
-                    case "help":
-                        {
-                            Main.NewText("Commands:", 255, 195, 0);
-                            Main.NewText("   \\build", 255, 195, 0);
-                            Main.NewText("   \\light", 255, 195, 0);
-                            Main.NewText("   \\god", 255, 195, 0);
-                            Main.NewText("   \\debug", 255, 195, 0);
-                            Main.NewText("   \\speed", 255, 195, 0);
-                            Main.NewText("   \\noclip", 255, 195, 0);
-                            Main.NewText("   \\tp", 255, 195, 0);
-                            break;
-                        }
-
                     default:
                         {
                             return false;
@@ -915,8 +866,7 @@ namespace Terraria
             }
             catch (Exception)
             {
-                flag3 = false;
-                return flag3;
+                return false;
             }
         }
     }
