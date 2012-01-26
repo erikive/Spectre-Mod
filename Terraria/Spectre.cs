@@ -26,6 +26,7 @@ namespace Terraria
         public static bool cBuffInfinite = false;
         private static string[] cCmd = new string[100];
         public static bool cGrav = true;
+        public static bool Invis = false;
         public static int cgreen = 0xff;
         private static string[] cKeys = new string[100];
         public static int cred = 0xff;
@@ -42,7 +43,7 @@ namespace Terraria
         public int Index { get; protected set; }
         public static int chatSpam = 1;
         public static int speedBonus = 1;
-        public static bool Ghost;
+        //public static bool Ghost;
 
         public static Color GetStatusColor(bool test)
         {
@@ -62,7 +63,7 @@ namespace Terraria
         {
             if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F8))
             {
-                //Main.NewText(Main.chatText, 50, 0xff, 130);
+                //sendText(Main.chatText, 50, 0xff, 130);
                 //NetMessage.SendData(25, -1, -1, Main.chatText, 0xff, 0f, 0f, 0f, 0);
                 NetMessage.SendData(25, -1, -1, chatSpam.ToString() + " " + Main.chatText, 0xff, 0f, 0f, 0f, 0);
                 Thread.Sleep(0);
@@ -284,35 +285,6 @@ namespace Terraria
 
         public static void main()
         {
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F6))
-            {
-                NPC.SpawnOnPlayer(0, 4);
-            }
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F7))
-            {
-                NPC.SpawnOnPlayer(0, 13);
-            }
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F8))
-            {
-                NPC.SpawnOnPlayer(0, 0x23);
-            }
-            if ((monstersLeft > 0) && (monsterType != 0))
-            {
-                if (!spawnCur)
-                {
-                    NPC.SpawnOnPlayer(0, monsterType);
-                    Main.NewText(monstersLeft.ToString() + " left", 0xaf, 0x4b, 0xff);
-                }
-                else
-                {
-                    int num = (Main.mouseState.X + ((int)Main.screenPosition.X)) / 0x10;
-                    int num2 = (Main.mouseState.Y + ((int)Main.screenPosition.Y)) / 0x10;
-                    int index = NPC.NewNPC((int)Main.player[Main.myPlayer].position.X, (int)Main.player[Main.myPlayer].position.Y, monsterType, 0);
-                    Main.npc[index].netUpdate = true;
-                    Main.NewText(monstersLeft.ToString() + " left", 0xaf, 0x4b, 0xff);
-                }
-                monstersLeft--;
-            }
             if (debugLeftClick.CompareTo("deletetile") == 0)
             {
                 deleteTile();
@@ -343,9 +315,13 @@ namespace Terraria
             }
         }
 
+        public static void sendText(string text)
+        {
+            Main.NewText(text, 255, 195, 0);
+        }
+
         public static bool onChat(string text)
         {
-            bool flag3;
             try
             {
                 if (!(text.Substring(0, 1) == "\\"))
@@ -356,7 +332,6 @@ namespace Terraria
                 string parameter = "off";
                 string str = "empty command";
                 string itemName = "empty string";
-                int time = 1;
                 var count = 1;
 
                 if (text.IndexOf(' ') != text.LastIndexOf(' '))
@@ -391,63 +366,31 @@ namespace Terraria
                 }
                 switch (str)
                 {
-                    //case "give":
-                    //case "item":
-                    //case "i":
-                    //    {
-                    //        int type = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                    //        var newItem = new Item();
-                    //        newItem.SetDefaults(parameter);
-                    //        newItem.stack = count;
-
-                    //        var chat = "Giving " + Main.player[Main.myPlayer].name + " " + count + "x " + parameter + ".";
-                    //        //NetMessage.SendData(0x19, -1, -1, chat, Main.myPlayer, 0f, 0f, 0f);
-                    //        Main.NewText(chat, 255, 195, 0);
-                    //        while (count > newItem.maxStack)
-                    //        {
-                    //            newItem.stack = newItem.maxStack;
-                    //            Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
-                    //            count = count - newItem.maxStack;
-                    //            newItem = new Item();
-                    //            newItem.SetDefaults(parameter);
-                    //        }
-                    //        newItem.stack = count;
-                    //        Main.player[Main.myPlayer].GetItem(Main.myPlayer, newItem);
-                    //        break;
-                    //    }
-
-
-                    //case "aimbot":
-                    //    if (Player.aimBot)
-                    //    {
-                    //        Player.aimBot = false;
-                    //        Main.NewText("Aimbot deactivated.", 255, 195, 0);
-                    //    }
-                    //    else
-                    //    {
-                    //        Player.aimBot = true;
-                    //        Main.NewText("Aimbot activated.", 255, 195, 0);
-                    //    }
-                    //    goto Break;
-
-                    //case "lightmouse":
-                    //    if (Main.mouseLight == false)
-                    //    {
-                    //        Main.mouseLight = true;
-                    //        Main.NewText("Light mouse activated.", 255, 195, 0);
-                    //    }
-                    //    else
-                    //    {
-                    //        Main.mouseLight = false;
-                    //        Main.NewText("Light mouse deactivated.", 255, 195, 0);
-                    //    }
-                    //    goto Break;
-
-                    case "killall":
+                    case "lightmouse":
                         {
-                            for (int abc = 0; abc < Main.player.Count(); abc++)
+                            if (Main.mouseLight == false)
                             {
-                                WorldGen.PlaceTile((int)Main.player[abc].position.X, (((int)Main.player[abc].position.Y) + 4), 138, false, true, -1, 0);
+                                Main.mouseLight = true;
+                                sendText("Light mouse activated.");
+                            }
+                            else
+                            {
+                                Main.mouseLight = false;
+                                sendText("Light mouse deactivated.");
+                            }
+                            break;
+                        }
+                    //still a work in progress
+                    case "kill":
+                        {
+                            string name = (text.Substring(text.LastIndexOf(' ') + 1));
+                            for (int name1 = 0; name != Main.player[name1].name; name1++) 
+                            {
+                                if (Main.player[name1].name == name)
+                                {
+                                    Main.player[name1].statLife = 0;
+                                    WorldGen.PlaceTile((int)Main.player[name1].position.X, (((int)Main.player[name1].position.Y) + 4), 138, true, true, -1, 0);
+                                }
                             }
                             break;
                         }
@@ -482,21 +425,22 @@ namespace Terraria
                             if (immunetoDeBuffs)
                             {
                                 immunetoDeBuffs = false;
-                                Main.NewText("Immune to debuff mode deactivated.", 255, 195, 0);
+                                sendText("Immune to debuff mode deactivated.");
                             }
                             else
                             {
                                 immunetoDeBuffs = true;
-                                Main.NewText("Immune to debuff mode activated.", 255, 195, 0);
+                                sendText("Immune to debuff mode activated.");
                             }
                             break;
                         }
+
                     case "usetime":
                     case "ut":
                         {
                             int usetime = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
-                            Main.NewText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".", 255, 195, 0);
+                            sendText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".");
                             break;
                         }
 
@@ -505,7 +449,7 @@ namespace Terraria
                         {
                             int shootspeed = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
-                            Main.NewText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".", 255, 195, 0);
+                            sendText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".");
                             break;
                         }
 
@@ -513,7 +457,7 @@ namespace Terraria
                         {
                             int damage = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = damage;
-                            Main.NewText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".", 255, 195, 0);
+                            sendText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".");
                             break;
                         }
 
@@ -522,12 +466,12 @@ namespace Terraria
                             int shoot = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             if (Main.projectile[shoot].name == null)
                             {
-                                Main.NewText("No such item.", 255, 195, 0);
+                                sendText("No such item.");
                             }
                             else
                             {
                                 Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
-                                Main.NewText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + "s.", 255, 195, 0);
+                                sendText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + "s.");
                             }
                             break;
                         }
@@ -564,7 +508,7 @@ namespace Terraria
                     case "bunny":
                         {
                             Main.player[Main.myPlayer].AddBuff(40, 999999, false);
-                            Main.NewText("Bunny activated.", 255, 195, 0);
+                            sendText("Bunny activated.");
                             break;
                         }
 
@@ -573,27 +517,12 @@ namespace Terraria
                             if (Main.debugMode)
                             {
                                 Main.debugMode = false;
-                                Main.NewText("Debug mode deactivated.", 255, 195, 0);
+                                sendText("Debug mode deactivated.");
                             }
                             else
                             {
                                 Main.debugMode = true;
-                                Main.NewText("Debug mode activated.", 255, 195, 0);
-                            }
-                            break;
-                        }
-
-                    case "ghost":
-                        {
-                            if (Ghost)
-                            {
-                                Ghost = false;
-                                Main.NewText("You are no longer a ghost.", 255, 195, 0);
-                            }
-                            else
-                            {
-                                Ghost = true;
-                                Main.NewText("You are now a ghost.", 255, 195, 0);
+                                sendText("Debug mode activated.");
                             }
                             break;
                         }
@@ -603,12 +532,12 @@ namespace Terraria
                             if (Main.noClip)
                             {
                                 Main.noClip = false;
-                                Main.NewText("Noclip mode deactivated.", 255, 195, 0);
+                                sendText("Noclip mode deactivated.");
                             }
                             else
                             {
                                 Main.noClip = true;
-                                Main.NewText("Noclip mode activated.", 255, 195, 0);
+                                sendText("Noclip mode activated.");
                             }
                             break;
                         }
@@ -618,12 +547,12 @@ namespace Terraria
                             if (Player.infAmmo == true)
                             {
                                 Player.infAmmo = false;
-                                Main.NewText("Infinite ammo deactivated.", 255, 195, 0);
+                                sendText("Infinite ammo deactivated.");
                             }
                             else
                             {
                                 Player.infAmmo = true;
-                                Main.NewText("Infinite ammo activated.", 255, 195, 0);
+                                sendText("Infinite ammo activated.");
                             }
                             break;
                         }
@@ -633,12 +562,12 @@ namespace Terraria
                             if (debugLeftClick == "addwater")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Water off.", 255, 195, 0);
+                                sendText("Water off.");
                             }
                             else
                             {
                                 debugLeftClick = "addwater";
-                                Main.NewText("Water on.", 255, 195, 0);
+                                sendText("Water on.");
                             }
                             break;
                         }
@@ -648,12 +577,12 @@ namespace Terraria
                             if (debugLeftClick == "addlava")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Lava off.", 255, 195, 0);
+                                sendText("Lava off.");
                             }
                             else
                             {
                                 debugLeftClick = "addlava";
-                                Main.NewText("Lava on.", 255, 195, 0);
+                                sendText("Lava on.");
                             }
                             break;
                         }
@@ -663,12 +592,12 @@ namespace Terraria
                             if (debugLeftClick == "deletetile")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Delete tile mode off.", 255, 195, 0);
+                                sendText("Delete tile mode off.");
                             }
                             else
                             {
                                 debugLeftClick = "deletetile";
-                                Main.NewText("Delete tile mode on.", 255, 195, 0);
+                                sendText("Delete tile mode on.");
                             }
                             break;
                         }
@@ -679,12 +608,12 @@ namespace Terraria
                             if (debugLeftClick == "deleteLava")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Delete lava mode off.", 255, 195, 0);
+                                sendText("Delete lava mode off.");
                             }
                             else
                             {
                                 debugLeftClick = "deleteLava";
-                                Main.NewText("Delete lava mode on.", 255, 195, 0);
+                                sendText("Delete lava mode on.");
                             }
                             break;
                         }
@@ -694,12 +623,12 @@ namespace Terraria
                             if (debugLeftClick == "deleteWater")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Delete water mode off.", 255, 195, 0);
+                                sendText("Delete water mode off.");
                             }
                             else
                             {
                                 debugLeftClick = "deleteWater";
-                                Main.NewText("Delete water mode on.", 255, 195, 0);
+                                sendText("Delete water mode on.");
                             }
                             break;
                         }
@@ -709,12 +638,12 @@ namespace Terraria
                             if (debugLeftClick == "deletewall")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Delete wall mode off.", 255, 195, 0);
+                                sendText("Delete wall mode off.");
                             }
                             else
                             {
                                 debugLeftClick = "deletewall";
-                                Main.NewText("Delete wall mode on.", 255, 195, 0);
+                                sendText("Delete wall mode on.");
                             }
                             break;
                         }
@@ -724,12 +653,12 @@ namespace Terraria
                             if (Player.godMode)
                             {
                                 Player.godMode = false;
-                                Main.NewText("Godmode deactivated.", 255, 195, 0);
+                                sendText("Godmode deactivated.");
                             }
                             else
                             {
                                 Player.godMode = true;
-                                Main.NewText("Godmode activated.", 255, 195, 0);
+                                sendText("Godmode activated.");
                             }
                             break;
                         }
@@ -737,10 +666,10 @@ namespace Terraria
                     case "selsize":
                         {
                             selSize = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.NewText("Changing selsize to " + selSize, 255, 195, 0);
+                            sendText("Changing selsize to " + selSize);
                             if (selSize > 10)
                             {
-                                Main.NewText("WARNING: Large size selected.", 255, 100, 0);
+                                sendText("WARNING: Large size selected.");
                             }
                             break;
                         }
@@ -749,52 +678,54 @@ namespace Terraria
                     case "type":
                         {
                             tileType = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.NewText("Changing tiletype to " + tileType, 255, 195, 0);
+                            sendText("Changing tiletype to " + tileType);
                             break;
                         }
 
                     case "walltype":
                         {
                             wallType = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            Main.NewText("Changing walltype to " + tileType, 255, 195, 0);
+                            sendText("Changing walltype to " + tileType);
                             break;
                         }
 
+                    /* Corrupts player file. Do not use.
                     case "noname":
                         {
                             if (Player.nameLen == 0)
                             {
                                 Player.nameLen = 100;
-                                Main.NewText("You no longer have a blank name.", 255, 100, 0);
+                                sendText("You no longer have a blank name.");
                             }
                             else
                             {
                                 Player.nameLen = 0;
-                                Main.NewText("You now have a blank name.", 255, 100, 0);
+                                sendText("You now have a blank name.");
                             }
                             break;
                         }
+                     */
 
                     case "light":
                         {
                             if (Spectre.FullBright)
                             {
                                 Spectre.FullBright = false;
-                                Main.NewText("Light mode deactivated.", 255, 195, 0);
+                                sendText("Light mode deactivated.");
                             }
                             else
                             {
                                 Spectre.FullBright = true;
-                                Main.NewText("Light mode activated.", 255, 195, 0);
+                                sendText("Light mode activated.");
                             }
                             break;
                         }
 
                     case "speed":
                         {
-                            time = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            speedBonus = time;
-                            Main.NewText("Changing speed to " + time + " times original speed", 255, 195, 0);
+                            float speed = float.Parse(text.Substring(text.LastIndexOf(' ') + 1));
+                            Main.player[Main.myPlayer].moveSpeed = speed;
+                            sendText("Changing speed to " + speed + " times original speed");
                             break;
                         }
 
@@ -804,13 +735,13 @@ namespace Terraria
                             {
                                 Player.tileRangeY = 5;
                                 Player.tileRangeX = 4;
-                                Main.NewText("Build mode deactivated.", 255, 195, 0);
+                                sendText("Build mode deactivated.");
                             }
                             else
                             {
                                 Player.tileRangeY = 0x1869f;
                                 Player.tileRangeX = 0x1869f;
-                                Main.NewText("Build mode activated.", 255, 195, 0);
+                                sendText("Build mode activated.");
                             }
                             break;
                         }
@@ -820,7 +751,7 @@ namespace Terraria
                     case "wall":
                         {
                             debugLeftClick = "addwall";
-                            Main.NewText("Wall edit mode enabled.", 255, 195, 0);
+                            sendText("Wall edit mode enabled.");
                             break;
                         }
 
@@ -831,12 +762,12 @@ namespace Terraria
                             if (debugLeftClick == "addtile")
                             {
                                 debugLeftClick = "";
-                                Main.NewText("Tile edit mode disabled.", 255, 195, 0);
+                                sendText("Tile edit mode disabled.");
                             } 
                             else
                             { 
                                 debugLeftClick = "addtile";
-                                Main.NewText("Tile edit mode enabled.", 255, 195, 0);
+                                sendText("Tile edit mode enabled.");
                             }
                             
                             break;
@@ -847,12 +778,12 @@ namespace Terraria
                             if (Main.allTeams)
                             {
                                 Main.allTeams = false;
-                                Main.NewText("Hiding teams.", 255, 195, 0);
+                                sendText("Hiding teams.");
                             }
                             else
                             {
                                 Main.allTeams = true;
-                                Main.NewText("Showing all teams.", 255, 195, 0);
+                                sendText("Showing all teams.");
                             }
                             break;
                         }
