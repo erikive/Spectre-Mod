@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Threading;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 
 namespace Terraria
@@ -16,32 +16,15 @@ namespace Terraria
         public static bool addTiles = false;
         public static int tileType = 0;
         public static int wallType = 30;
-        public static bool showUI = true;
         public static string lastCommand = "";
         public static bool FullBright = false;
         public static bool immunetoDeBuffs = true;
         public static float LightLevel = 0.8f;
         public static bool infItems = true;
-        public static int cblue = 0xff;
-        public static bool hellwall = false;
-        public static bool cBuffInfinite = false;
-        private static string[] cCmd = new string[100];
-        public static bool cGrav = true;
         public static bool Invis = false;
-        public static int cgreen = 0xff;
-        private static string[] cKeys = new string[100];
-        public static int cred = 0xff;
-        public static int cStack = 0;
         private static string debugLeftClick = "";
-        public static char[] delimit = new char[] { ' ' };
-        public static char[] delimit2 = new char[] { ';' };
-        private static int monstersLeft = 0;
-        private static int monsterType = 0;
-        private static byte selAmount = 0xff;
-        public static bool mouseReleaseNeeded = true;
+        private static byte selAmount = 1;
         private static int selSize = 1;
-        private static bool spawnCur = false;
-        public int Index { get; protected set; }
         public static int chatSpam = 1;
         public static int speedBonus = 1;
         //public static bool Ghost;
