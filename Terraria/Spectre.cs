@@ -10,6 +10,7 @@ namespace Terraria
 {
     class Spectre
     {
+        public static bool infMana = true;
         public static bool addWalls = false;
         public static bool Bunny = false;
         public static bool addTiles = false;

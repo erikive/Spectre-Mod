@@ -652,7 +652,7 @@ namespace Terraria
                         if (this.statMana >= (int)((float)this.inventory[i].mana * this.manaCost))
                         {
                             this.manaRegenDelay = (int)this.maxRegenDelay;
-                            this.statMana -= (int)((float)this.inventory[i].mana * this.manaCost);
+                            if (!Spectre.infMana) { this.statMana -= (int)((float)this.inventory[i].mana * this.manaCost); }
                         }
                         else
                         {
@@ -7059,7 +7059,7 @@ namespace Terraria
                     {
                         if (this.statMana >= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost))
                         {
-                            this.statMana -= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost);
+                            if (!Spectre.infMana) { this.statMana -= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost); }
                         }
                         else
                         {
@@ -7068,7 +7068,7 @@ namespace Terraria
                                 this.QuickMana();
                                 if (this.statMana >= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost))
                                 {
-                                    this.statMana -= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost);
+                                    if (!Spectre.infMana) { this.statMana -= (int)((float)this.inventory[this.selectedItem].mana * this.manaCost); }
                                 }
                                 else
                                 {
