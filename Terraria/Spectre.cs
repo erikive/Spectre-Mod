@@ -306,7 +306,7 @@ namespace Terraria
             {
                 addTile(tileType);
             }
-            else if (debugLeftClick.CompareTo("addwall") == 0)
+            else if (debugLeftClick.CompareTo("addwalls") == 0)
             {
                 addWall(wallType);
             }
@@ -751,8 +751,16 @@ namespace Terraria
                     case "addwall":
                     case "wall":
                         {
-                            debugLeftClick = "addwall";
-                            sendText("Wall edit mode enabled.");
+                            if (debugLeftClick == "addwalls")
+                            {
+                                debugLeftClick = "";
+                                sendText("Wall edit mode disabled.");
+                            }
+                            else
+                            {
+                                debugLeftClick = "addwalls";
+                                sendText("Wall edit mode enabled.");
+                            }
                             break;
                         }
 
