@@ -165,6 +165,12 @@ namespace Terraria
             }
         }
 
+        private static string[] parameter(string text)
+        {
+            string[] parameters = text.Split(' ');
+            return parameters;
+        }
+
         private static void deleteLava()
         {
             int i = (Main.mouseState.X + ((int)Main.screenPosition.X)) / 0x10;
@@ -313,24 +319,9 @@ namespace Terraria
                     return true;
                 }
                 lastCommand = text;
-                string parameter = "off";
                 string str = "empty command";
                 string itemName = "empty string";
                 var count = 1;
-
-                if (text.IndexOf(' ') != text.LastIndexOf(' '))
-                {
-                    count = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                    if (count != 0)
-                    {
-                        parameter = parameter.Substring(0, parameter.LastIndexOf(' '));
-                    }
-                    else
-                    {
-                        count = 1;
-                    }
-                }
-
 
                 if (IndexOfOccurence(text, " ", 1) == -1)
                 {
@@ -379,6 +370,14 @@ namespace Terraria
                             break;
                         }
 
+                    case "pdebug":
+                            {
+                                string para;
+                                para = parameter(text)[0] + " " + parameter(text)[1] + " " + parameter(text)[2] + " " + parameter(text)[3] + " " + parameter(text)[4];
+                                sendText(para);
+                                break;
+                            }
+
                     case "who":
                         {
                             string players = "";
@@ -415,6 +414,66 @@ namespace Terraria
                             {
                                 immunetoDeBuffs = true;
                                 sendText("Immune to debuff mode activated.");
+                            }
+                            break;
+                        }
+
+                    case "i":
+                        {
+                            switch (parameter(text)[1])
+                            {
+                                case "usetime":
+                                case "ut":
+                                    {
+                                        int usetime = int.Parse(parameter(text)[2]);
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].useTime = usetime;
+                                        sendText("Use time for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + usetime + ".");
+                                        break;
+                                    }
+                                case "shootspeed":
+                                case "ss":
+                                    {
+                                        int shootspeed = int.Parse(parameter(text)[2]);
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shootSpeed = shootspeed;
+                                        sendText("Shoot speed for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + shootspeed + ".");
+                                        break;
+                                    }
+                                case "damage":
+                                case "d":
+                                    {
+                                        int damage = int.Parse(parameter(text)[2]);
+                                        Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].damage = damage;
+                                        sendText("Damage for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " changed to " + damage + ".");
+                                        break;
+                                    }
+                                case "shoot":
+                                case "s":
+                                    {
+                                        int shoot = int.Parse(parameter(text)[2]);
+                                        if (Main.projectile[shoot].name == null)
+                                        {
+                                            sendText("No such item.");
+                                        }
+                                        else
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
+                                            sendText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + "s.");
+                                        }
+                                        break;
+                                    }
+                                case "autoreuse":
+                                case "ar":
+                                    {
+                                        if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse)
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = false;
+                                        }
+                                        else
+                                        {
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
+                                        }
+                                        break;
+                                    }
                             }
                             break;
                         }
