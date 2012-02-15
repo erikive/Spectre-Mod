@@ -1601,7 +1601,6 @@ namespace Terraria
                     {
                         goto IL_4AC8;
                     }
-                    goto IL_4036;
                 }
             IL_4AC8:
                 if (Main.verboseNetplay)

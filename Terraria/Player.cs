@@ -5071,7 +5071,6 @@ namespace Terraria
                         {
                             goto IL_8F18;
                         }
-                        goto IL_8F11;
                     }
                     goto IL_8F11;
                 IL_8F18:

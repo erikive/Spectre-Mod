@@ -10,6 +10,7 @@ namespace Terraria
 {
     class Spectre
     {
+        public static int lines = 7;
         public static bool infMana = true;
         public static bool addWalls = false;
         public static bool Bunny = false;
@@ -131,11 +132,14 @@ namespace Terraria
                 {
                     for (int num2 = selSize; num2 >= -selSize; num2--)
                     {
-                        WorldGen.KillTile(i + num, j + num2, false, false, false);
-                        WorldGen.PlaceTile(i + num, j + num2, tileType, true, false, -1, 0);
-                        if (Main.netMode == 1)
+                        if (Main.tile[i + num, j + num].type == tileType)
                         {
-                            NetMessage.SendTileSquare(-1, i +num, j + num2, 1);
+                            WorldGen.KillTile(i + num, j + num2, false, false, false);
+                            WorldGen.PlaceTile(i + num, j + num2, tileType, true, false, -1, 0);
+                            if (Main.netMode == 1)
+                            {
+                                NetMessage.SendTileSquare(-1, i + num, j + num2, 1);
+                            }
                         }
                     }
                 }
@@ -415,6 +419,13 @@ namespace Terraria
                                 immunetoDeBuffs = true;
                                 sendText("Immune to debuff mode activated.");
                             }
+                            break;
+                        }
+
+                    case "chatlines":
+                        {                          
+                            Main.numChatLines = int.Parse(parameter(text)[1]);
+                            sendText("Now showing " + Main.numChatLines + " lines.");
                             break;
                         }
 

@@ -4768,7 +4768,6 @@ namespace Terraria
                     {
                         goto IL_15BE;
                     }
-                    goto IL_15AF;
                 }
                 goto IL_15AF;
             IL_15BE:
@@ -4806,7 +4805,6 @@ namespace Terraria
                         Main.npc[num8] = new NPC();
                         goto IL_166E;
                     }
-                    goto IL_165F;
                 }
                 goto IL_165F;
             IL_166E:
@@ -4831,7 +4829,6 @@ namespace Terraria
                         Main.gore[num9] = new Gore();
                         goto IL_16B5;
                     }
-                    goto IL_16A8;
                 }
                 goto IL_16A8;
             IL_16B5:
@@ -4856,7 +4853,6 @@ namespace Terraria
                         Main.projectile[num10] = new Projectile();
                         goto IL_1700;
                     }
-                    goto IL_16F1;
                 }
                 goto IL_16F1;
             IL_1700:
@@ -4881,7 +4877,6 @@ namespace Terraria
                         Main.item[num11] = new Item();
                         goto IL_174B;
                     }
-                    goto IL_173C;
                 }
                 goto IL_173C;
             IL_174B:
@@ -4996,7 +4991,6 @@ namespace Terraria
                     }
                     goto IL_18CE;
                 }
-                goto IL_1895;
             }
             goto IL_1895;
         IL_18CE:

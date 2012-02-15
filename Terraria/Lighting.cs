@@ -1038,7 +1038,6 @@ namespace Terraria
                                                             }
                                                             goto IL_2DE7;
                                                         }
-                                                        break;
                                                     }
                                                 default:
                                                     {
@@ -1161,7 +1160,6 @@ namespace Terraria
                                                                     goto IL_2DE7;
                                                                 }
                                                         }
-                                                        break;
                                                     }
                                             }
                                         }
@@ -1541,7 +1539,6 @@ namespace Terraria
                                                         }
                                                         goto IL_2DE7;
                                                     }
-                                                    break;
                                                 }
                                         }
                                     }
@@ -1647,7 +1644,6 @@ namespace Terraria
                                                                     goto IL_2DE7;
                                                                 }
                                                         }
-                                                        break;
                                                     }
                                             }
                                         }
