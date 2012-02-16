@@ -10,6 +10,7 @@ namespace Terraria
 {
     class Spectre
     {
+        public static int zoom = 1;
         public static int lines = 7;
         public static bool infMana = true;
         public static bool addWalls = false;
@@ -132,15 +133,15 @@ namespace Terraria
                 {
                     for (int num2 = selSize; num2 >= -selSize; num2--)
                     {
-                        if (Main.tile[i + num, j + num].type == tileType)
-                        {
+                        //if (Main.tile[i + num, j + num].type == tileType)
+                        //{
                             WorldGen.KillTile(i + num, j + num2, false, false, false);
                             WorldGen.PlaceTile(i + num, j + num2, tileType, true, false, -1, 0);
                             if (Main.netMode == 1)
                             {
                                 NetMessage.SendTileSquare(-1, i + num, j + num2, 1);
                             }
-                        }
+                        //}
                     }
                 }
             }
@@ -407,6 +408,13 @@ namespace Terraria
                             break;
                         }
 
+                    case "zoom":
+                        {
+                            int.TryParse(parameter(text)[1], out zoom);
+                            sendText("Zoomed in " + zoom + " times.");
+                            break;
+                        }
+
                     case "debuff":
                         {
                             if (immunetoDeBuffs)
@@ -423,9 +431,10 @@ namespace Terraria
                         }
 
                     case "chatlines":
-                        {                          
-                            Main.numChatLines = int.Parse(parameter(text)[1]);
-                            sendText("Now showing " + Main.numChatLines + " lines.");
+                        {       
+                            int.TryParse(parameter(text)[1], out lines);
+                            Main.numChatLines = lines;
+                            sendText("Now showing " + Main.numChatLines + " chat lines.");
                             break;
                         }
 

@@ -657,7 +657,7 @@ namespace Terraria
         public static int chatLength = 600;
         public static bool chatMode = false;
         public static bool chatRelease = false;
-        public static int numChatLines = 7;
+        public static int numChatLines = 20;
         public static string chatText = "";
         public static ChatLine[] chatLine = new ChatLine[Main.numChatLines];
         public static bool inputTextEnter = false;
@@ -4987,7 +4987,7 @@ namespace Terraria
                 {
                     for (int num14 = 0; num14 < Main.numChatLines; num14++)
                     {
-                        Main.chatLine[num14] = new ChatLine();
+                        //Main.chatLine[num14] = new ChatLine();
                     }
                     goto IL_18CE;
                 }
@@ -21811,25 +21811,25 @@ namespace Terraria
                 }
             IL_B5:
                 viewport = base.GraphicsDevice.Viewport;
-                Main.screenWidth = viewport.Width;
+                Main.screenWidth = viewport.Width * Spectre.zoom;
                 viewport = base.GraphicsDevice.Viewport;
-                Main.screenHeight = viewport.Height;
-                if (Main.screenWidth > Main.maxScreenW)
+                Main.screenHeight = viewport.Height * Spectre.zoom;
+                if (Main.screenWidth > Main.maxScreenW && Spectre.zoom != 1)
                 {
                     Main.screenWidth = Main.maxScreenW;
                     flag = true;
                 }
-                if (Main.screenHeight > Main.maxScreenH)
+                if (Main.screenHeight > Main.maxScreenH && Spectre.zoom != 1)
                 {
                     Main.screenHeight = Main.maxScreenH;
                     flag = true;
                 }
-                if (Main.screenWidth < Main.minScreenW)
+                if (Main.screenWidth < Main.minScreenW && Spectre.zoom != 1)
                 {
                     Main.screenWidth = Main.minScreenW;
                     flag = true;
                 }
-                if (Main.screenHeight < Main.minScreenH)
+                if (Main.screenHeight < Main.minScreenH && Spectre.zoom != 1)
                 {
                     Main.screenHeight = Main.minScreenH;
                     flag = true;
