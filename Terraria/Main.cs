@@ -4546,7 +4546,7 @@ namespace Terraria
                         Main.PlaySound(11, -1, -1, 1);
                     }
                 }
-                if (Main.keyState.IsKeyDown(Keys.Enter) && Main.netMode == 1 && !Main.keyState.IsKeyDown(Keys.LeftAlt) && !Main.keyState.IsKeyDown(Keys.RightAlt))
+                if (Main.keyState.IsKeyDown(Keys.Enter) && !Main.keyState.IsKeyDown(Keys.LeftAlt) && !Main.keyState.IsKeyDown(Keys.RightAlt))
                 {
                     if (Main.chatRelease && !Main.chatMode && !Main.editSign && !Main.keyState.IsKeyDown(Keys.Escape))
                     {
