@@ -4767,7 +4767,7 @@ namespace Terraria
                             if (this.breathCD >= num121)
                             {
                                 this.breathCD = 0;
-                                this.breath--;
+                                if (!Player.godMode) { this.breath--; }
                                 if (this.breath == 0)
                                 {
                                     Main.PlaySound(23, -1, -1, 1);

@@ -730,7 +730,7 @@ namespace Terraria
                         {
                             selSize = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             sendText("Changing selsize to " + selSize);
-                            if (selSize > 10)
+                            if (selSize >= 10)
                             {
                                 sendText("WARNING: Large size selected.");
                             }
