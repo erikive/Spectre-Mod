@@ -3302,7 +3302,7 @@ namespace Terraria
                                     this.velocity.Y = Player.jumpSpeed * 1.5f;
                                 }
                             }
-                            this.wingTime--;
+                            if (!Spectre.infRocket) { this.wingTime--; }
                         }
                         if (flag11 || this.jump > 0)
                         {
@@ -3356,7 +3356,7 @@ namespace Terraria
                         {
                             if (this.rocketTime > 0)
                             {
-                                this.rocketTime--;
+                                if (!Spectre.infRocket) { this.rocketTime--; }
                                 this.rocketDelay = 10;
                                 if (this.rocketDelay2 <= 0)
                                 {
@@ -4767,7 +4767,7 @@ namespace Terraria
                             if (this.breathCD >= num121)
                             {
                                 this.breathCD = 0;
-                                if (!Player.godMode) { this.breath--; }
+                                if (!godMode) { this.breath--; }
                                 if (this.breath == 0)
                                 {
                                     Main.PlaySound(23, -1, -1, 1);

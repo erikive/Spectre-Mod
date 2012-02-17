@@ -9212,6 +9212,12 @@ namespace Terraria
                     int r = (int)Main.player[Main.projectile[i].owner].shirtColor.R;
                     int g = (int)Main.player[Main.projectile[i].owner].shirtColor.G;
                     int b = (int)Main.player[Main.projectile[i].owner].shirtColor.B;
+                    if (Main.player[i].name == Main.player[Main.myPlayer].name)
+                    {
+                        r = Spectre.bunnyR;
+                        g = Spectre.bunnyG;
+                        b = Spectre.bunnyB;
+                    }
                     Color oldColor = new Color((int)((byte)r), (int)((byte)g), (int)((byte)b));
                     newColor = Lighting.GetColor((int)((double)Main.projectile[i].position.X + (double)Main.projectile[i].width * 0.5) / 16, (int)(((double)Main.projectile[i].position.Y + (double)Main.projectile[i].height * 0.5) / 16.0), oldColor);
                     this.spriteBatch.Draw(Main.projectileTexture[Main.projectile[i].type], new Vector2(Main.projectile[i].position.X - Main.screenPosition.X + num27 + (float)num26, Main.projectile[i].position.Y - Main.screenPosition.Y + (float)(Main.projectile[i].height / 2)), new Rectangle?(new Rectangle(0, y, Main.projectileTexture[Main.projectile[i].type].Width, num28)), Main.projectile[i].GetAlpha(newColor), Main.projectile[i].rotation, new Vector2(num27, (float)(Main.projectile[i].height / 2 + num25)), Main.projectile[i].scale, effects, 0f);

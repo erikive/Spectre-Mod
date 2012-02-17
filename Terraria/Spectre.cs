@@ -10,6 +10,10 @@ namespace Terraria
 {
     class Spectre
     {
+        public static int bunnyR = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.R;
+        public static int bunnyG = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.G;
+        public static int bunnyB = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.B;
+        public static bool infRocket = true;
         public static int zoom = 1;
         public static int lines = 7;
         public static bool infMana = true;
@@ -408,6 +412,22 @@ namespace Terraria
                             break;
                         }
 
+                    case "bunnycolor":
+                        {
+                            switch (parameter(text)[1])
+                            {
+                                case "red":
+                                    {
+                                        bunnyR = (int)Color.Red.R;
+                                        bunnyG = (int)Color.Red.G;
+                                        bunnyB = (int)Color.Red.B;
+                                        break;
+                                    }
+                                default: break;
+                            }
+                            break;
+                        }
+
                     case "zoom":
                         {
                             int.TryParse(parameter(text)[1], out zoom);
@@ -564,6 +584,21 @@ namespace Terraria
                             else
                             {
                                 Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].consumable = true;
+                            }
+                            break;
+                        }
+
+                    case "infrocket":
+                        {
+                            if (infRocket)
+                            {
+                                infRocket = false;
+                                sendText("Infinite rocket disabled.");
+                            }
+                            else
+                            {
+                                infRocket = true;
+                                sendText("Infinite rocket enabled.");
                             }
                             break;
                         }
