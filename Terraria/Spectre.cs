@@ -13,6 +13,8 @@ namespace Terraria
         public static int bunnyR = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.R;
         public static int bunnyG = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.G;
         public static int bunnyB = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.B;
+        public static bool wWalk = true;
+        public static bool cGrav = true;
         public static bool infRocket = true;
         public static int zoom = 1;
         public static int lines = 7;
@@ -387,6 +389,34 @@ namespace Terraria
                                 break;
                             }
 
+                    case "grav":
+                    case "cgrav":
+                            {
+                                if (!cGrav == true)
+                                {
+                                    cGrav = true;
+                                }
+                                else
+                                {
+                                    cGrav = false;
+                                }
+                                break;
+                            }
+
+                    case "waterwalk":
+                    case "wwalk":
+                            {
+                                if (!wWalk == true)
+                                {
+                                    wWalk = true;
+                                }
+                                else
+                                {
+                                    wWalk = false;
+                                }
+                                break;
+                            }
+
                     case "who":
                         {
                             string players = "";
@@ -514,7 +544,45 @@ namespace Terraria
                                         }
                                         break;
                                     }
+                                case "nocolide":
+                                case "penetrate":
+                                case "pierce":
+                                    {
+                                        if (/*Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot.ToString() != null && */Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide)
+                                        {
+                                            Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = false;
+                                        }
+                                        else
+                                        {
+                                            Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = true;
+                                        }
+                                        break;
+                                    }
                             }
+                            break;
+                        }
+
+                    case "clearinv":
+                        {
+                            for (int n = 10; n <= 40; n++)
+                            {
+                                Main.player[Main.myPlayer].inventory[n].type = 0;
+                            }
+                            break;
+                        }
+
+                    case "nocolide":
+                    case "penetrate":
+                    case "pierce":
+                        {
+                            //if (Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot && Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide == false)
+                            //{
+                            //    Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = true;
+                            //}
+                            //else
+                            //{
+                                Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = false;
+                            //}
                             break;
                         }
 
@@ -584,6 +652,25 @@ namespace Terraria
                             else
                             {
                                 Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].consumable = true;
+                            }
+                            break;
+                        }
+
+                    case "buff":
+                        {
+                            int buff = 0;
+                            int? t = null;
+                            int t2 = 0;
+                            if (int.TryParse(parameter(text)[2], out t2)) { t = t2; }
+                            sendText(t2.ToString());
+                            int time = t ?? 18000;
+                            if (int.TryParse(parameter(text)[1], out buff))
+                            {
+                                Main.player[Main.myPlayer].AddBuff(buff, time, false);
+                            }
+                            else
+                            {
+                                sendText("Invalid buff type.");
                             }
                             break;
                         }
