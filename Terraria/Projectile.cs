@@ -1603,7 +1603,7 @@ namespace Terraria
                                                                                                                                                                                                                                                                                                                                                                                                                                                         this.width = 18;
                                                                                                                                                                                                                                                                                                                                                                                                                                                         this.height = 18;
                                                                                                                                                                                                                                                                                                                                                                                                                                                         this.aiStyle = 26;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        this.friendly = true;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        this.friendly = false;
                                                                                                                                                                                                                                                                                                                                                                                                                                                         this.penetrate = -1;
                                                                                                                                                                                                                                                                                                                                                                                                                                                         this.timeLeft *= 5;
                                                                                                                                                                                                                                                                                                                                                                                                                                                     }
@@ -3853,6 +3853,36 @@ namespace Terraria
                                                         if (Main.tile[l, m].type == 112)
                                                         {
                                                             Main.tile[l, m].type = 53;
+                                                            WorldGen.SquareTileFrame(l, m, true);
+                                                            if (Main.netMode == 1)
+                                                            {
+                                                                NetMessage.SendTileSquare(-1, l, m, 1);
+                                                            }
+                                                        }
+                                                        if (Main.tile[l, m].type == 113)
+                                                        {
+                                                            //Main.tile[l, m].type = 0;
+                                                            WorldGen.KillTile(l, m, false, false, false);
+                                                            WorldGen.SquareTileFrame(l, m, true);
+                                                            if (Main.netMode == 1)
+                                                            {
+                                                                NetMessage.SendTileSquare(-1, l, m, 1);
+                                                            }
+                                                        }
+                                                        if (Main.tile[l, m].type == 32)
+                                                        {
+                                                            //Main.tile[l, m].type = 2;
+                                                            WorldGen.KillTile(l, m, false, false, false);
+                                                            WorldGen.SquareTileFrame(l, m, true);
+                                                            if (Main.netMode == 1)
+                                                            {
+                                                                NetMessage.SendTileSquare(-1, l, m, 1);
+                                                            }
+                                                        }
+                                                        if (Main.tile[l, m].type == 24)
+                                                        {
+                                                            //Main.tile[l, m].type = 0;
+                                                            WorldGen.KillTile(l, m, false, false, false);
                                                             WorldGen.SquareTileFrame(l, m, true);
                                                             if (Main.netMode == 1)
                                                             {
@@ -6159,14 +6189,14 @@ namespace Terraria
                                                                                                     float num164 = Main.player[this.owner].position.Y + (float)(Main.player[this.owner].height / 2) - vector18.Y;
                                                                                                     float num165 = (float)Math.Sqrt((double)(num163 * num163 + num164 * num164));
                                                                                                     float num166 = 10f;
-                                                                                                    if (num165 < 200f && Main.player[this.owner].velocity.Y == 0f && this.position.Y + (float)this.height <= Main.player[this.owner].position.Y + (float)Main.player[this.owner].height && !Collision.SolidCollision(this.position, this.width, this.height))
-                                                                                                    {
-                                                                                                        this.ai[0] = 0f;
-                                                                                                        if (this.velocity.Y < -6f)
-                                                                                                        {
-                                                                                                            this.velocity.Y = -6f;
-                                                                                                        }
-                                                                                                    }
+                                                                                                    //if (num165 < 200f && Main.player[this.owner].velocity.Y == 0f && this.position.Y + (float)this.height <= Main.player[this.owner].position.Y + (float)Main.player[this.owner].height && !Collision.SolidCollision(this.position, this.width, this.height))
+                                                                                                    //{
+                                                                                                    //    this.ai[0] = 0f;
+                                                                                                    //    if (this.velocity.Y < -6f)
+                                                                                                    //    {
+                                                                                                    //        this.velocity.Y = -6f;
+                                                                                                    //    }
+                                                                                                    //}
                                                                                                     if (num165 < 60f)
                                                                                                     {
                                                                                                         num163 = this.velocity.X;

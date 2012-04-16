@@ -1614,7 +1614,9 @@ namespace Terraria
                         this.delayUseItem = true;
                     }
                     Player.tileTargetX = (int)(((float)Main.mouseX + Main.screenPosition.X) / 16f);
+                    Spectre.targetX = Player.tileTargetX;
                     Player.tileTargetY = (int)(((float)Main.mouseY + Main.screenPosition.Y) / 16f);
+                    Spectre.targetY = Player.tileTargetY;
                     if (this.immune)
                     {
                         this.immuneTime--;

@@ -20,44 +20,35 @@ namespace Terraria
         public static bool debugMode = false;
         public static bool mouseLight = false;
 
-        protected void iverMod()
+        protected void DrawSpectre()
         {
-            //Spectre.main();
-            //if (noClip)
-            //{
-            //    UpdateNoclip();
-            //}
-            //if (debugMode)
-            //{
-            //    UpdateDebug();
-            //}
-            //if (Spectre.cGrav)
-            //{
-            //    Main.player[Main.myPlayer].gravControl = true;
-            //}
-            //else
-            //{
-            //    Main.player[Main.myPlayer].gravControl = false;
-            //}
-            //if (Spectre.wWalk)
-            //{
-            //    Main.player[Main.myPlayer].waterWalk = true;
-            //}
-            //else
-            //{
-            //    Main.player[Main.myPlayer].waterWalk = false;
-            //}
-            //SpriteBatch.DrawString(
-            //    Main.fontMouseText,
-            //    Main.buffString,
-            //    new Vector2,
-            //    Color.Cyan,
-            //    0f,
-            //    default(Vector2),
-            //    1f,
-            //    SpriteEffects.None,
-            //    0f
-            //);
+            if (Spectre.showUI)
+            {
+                int y = Main.screenHeight - 30;
+                int x = Main.screenWidth - 200;
+                if (Main.playerInventory)
+                {
+                    y = Main.screenHeight - 30;
+                    x = Main.screenWidth - 400;
+                }
+                if (Spectre.FullBright)
+                    this.spriteBatch.DrawString(Main.fontMouseText, "Light Mode " + (Lighting.lightMode + 1), new Vector2(x, y), Color.White);
+                else
+                    this.spriteBatch.DrawString(Main.fontMouseText, "Full Bright Disabled", new Vector2(x, y), Color.White);
+                if (noClip)
+                    this.spriteBatch.DrawString(Main.fontMouseText, "No Clip: On", new Vector2(x, y - 20), Color.White);
+                else
+                    this.spriteBatch.DrawString(Main.fontMouseText, "No Clip: Off", new Vector2(x, y - 20), Color.White);
+                if (debugMode)
+                    this.spriteBatch.DrawString(Main.fontMouseText, "Debug Mode: On", new Vector2(x, y - 40), Color.White);
+                else
+                    this.spriteBatch.DrawString(Main.fontMouseText, "Debug Mode: Off", new Vector2(x, y - 40), Color.White);
+                if (Spectre.debugLeftClick.CompareTo("") != 0)
+                { 
+                    this.spriteBatch.DrawString(Main.fontMouseText, Spectre.debugLeftClick + " Mode Enabled", new Vector2(x, y - 80), Color.White);
+                    this.spriteBatch.DrawString(Main.fontMouseText, "Selection Size: " + (Spectre.selSize), new Vector2(x, y - 60), Color.White);
+                }
+            }
         }
 
         private static void UpdateDebug()
@@ -16780,6 +16771,7 @@ namespace Terraria
                 Main.chatLine[i] = new ChatLine();
             }
             this.DrawFPS();
+            this.DrawSpectre();
             Main.screenLastPosition = Main.screenPosition;
             Main.screenPosition.Y = (float)(Main.worldSurface * 16.0 - (double)Main.screenHeight);
             if (Main.grabSky)
@@ -24090,6 +24082,7 @@ namespace Terraria
                 }
                 this.DrawFPS();
                 this.DrawInterface();
+                this.DrawSpectre();
             }
             else
             {

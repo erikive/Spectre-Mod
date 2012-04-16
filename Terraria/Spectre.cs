@@ -14,7 +14,10 @@ namespace Terraria
         public static int bunnyG = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.G;
         public static int bunnyB = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.B;
         public static bool wWalk = true;
+        public static int targetX;
+        public static int targetY;
         public static bool cGrav = true;
+        public static bool showUI = true;
         public static bool infRocket = true;
         public static int zoom = 1;
         public static int lines = 7;
@@ -30,12 +33,11 @@ namespace Terraria
         public static float LightLevel = 0.8f;
         public static bool infItems = true;
         public static bool Invis = false;
-        private static string debugLeftClick = "";
+        public static string debugLeftClick = "";
         private static byte selAmount = 1;
-        private static int selSize = 1;
+        public static int selSize = 1;
         public static int chatSpam = 1;
         public static int speedBonus = 1;
-        //public static bool Ghost;
 
         public static Color GetStatusColor(bool test)
         {
@@ -111,7 +113,7 @@ namespace Terraria
                 {
                     for (int j = selSize; j >= -selSize; j--)
                     {
-                        if (debugLeftClick.CompareTo("addlava") == 0)
+                        if (debugLeftClick.CompareTo("Add Lava") == 0)
                         {
                             Main.tile[num + i, num2 + j].lava = true;
                         }
@@ -298,15 +300,15 @@ namespace Terraria
             {
                 deleteWall();
             }
-            else if ((debugLeftClick.CompareTo("addwater") == 0) || (debugLeftClick.CompareTo("addlava") == 0))
+            else if ((debugLeftClick.CompareTo("Add Water") == 0) || (debugLeftClick.CompareTo("Add Lava") == 0))
             {
                 addLiquid();
             }
-            else if (debugLeftClick.CompareTo("addtile") == 0)
+            else if (debugLeftClick.CompareTo("Add Tile") == 0)
             {
                 addTile(tileType);
             }
-            else if (debugLeftClick.CompareTo("addwalls") == 0)
+            else if (debugLeftClick.CompareTo("Add Wall") == 0)
             {
                 addWall(wallType);
             }
@@ -744,14 +746,14 @@ namespace Terraria
 
                     case "water":
                         {
-                            if (debugLeftClick == "addwater")
+                            if (debugLeftClick == "Add Water")
                             {
                                 debugLeftClick = "";
                                 sendText("Water off.");
                             }
                             else
                             {
-                                debugLeftClick = "addwater";
+                                debugLeftClick = "Add Water";
                                 sendText("Water on.");
                             }
                             break;
@@ -759,14 +761,14 @@ namespace Terraria
 
                     case "lava":
                         {
-                            if (debugLeftClick == "addlava")
+                            if (debugLeftClick == "Add Lava")
                             {
                                 debugLeftClick = "";
                                 sendText("Lava off.");
                             }
                             else
                             {
-                                debugLeftClick = "addlava";
+                                debugLeftClick = "Add Lava";
                                 sendText("Lava on.");
                             }
                             break;
@@ -851,7 +853,7 @@ namespace Terraria
                     case "selsize":
                         {
                             selSize = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
-                            sendText("Changing selsize to " + selSize);
+                            sendText("Changing selsize to " + (selSize * 2));
                             if (selSize >= 10)
                             {
                                 sendText("WARNING: Large size selected.");
@@ -871,6 +873,13 @@ namespace Terraria
                         {
                             wallType = int.Parse(text.Substring(text.LastIndexOf(' ') + 1));
                             sendText("Changing walltype to " + tileType);
+                            break;
+                        }
+
+                    case "identify":
+                        {
+                            sendText("Type: " + Main.tile[targetX, targetY].type);
+                            //sendText("Name: " + Main.tile[Main.mouseX, Main.mouseY].);
                             break;
                         }
 
@@ -935,14 +944,14 @@ namespace Terraria
                     case "addwall":
                     case "wall":
                         {
-                            if (debugLeftClick == "addwalls")
+                            if (debugLeftClick == "Add Wall")
                             {
                                 debugLeftClick = "";
                                 sendText("Wall edit mode disabled.");
                             }
                             else
                             {
-                                debugLeftClick = "addwalls";
+                                debugLeftClick = "Add Wall";
                                 sendText("Wall edit mode enabled.");
                             }
                             break;
@@ -952,14 +961,14 @@ namespace Terraria
                     case "addtile":
                     case "tile":
                         {
-                            if (debugLeftClick == "addtile")
+                            if (debugLeftClick == "Add Tile")
                             {
                                 debugLeftClick = "";
                                 sendText("Tile edit mode disabled.");
                             } 
                             else
                             { 
-                                debugLeftClick = "addtile";
+                                debugLeftClick = "Add Tile";
                                 sendText("Tile edit mode enabled.");
                             }
                             
