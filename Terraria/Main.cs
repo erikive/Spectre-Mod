@@ -9,8 +9,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+
 namespace Terraria
 {
+
     public class Main : Game
     {
         //Mods
@@ -36,7 +38,7 @@ namespace Terraria
                 else
                     this.spriteBatch.DrawString(Main.fontMouseText, "Full Bright Disabled", new Vector2(x, y), Color.White);
                 if (noClip)
-                    this.spriteBatch.DrawString(Main.fontMouseText, "No Clip: On", new Vector2(x, y - 20), Color.White);
+                    this.spriteBatch.DrawString(Main.fontMouseText, "No Clip: On (Speed: " + Spectre.noClipMod + ")", new Vector2(x, y - 20), Color.White);
                 else
                     this.spriteBatch.DrawString(Main.fontMouseText, "No Clip: Off", new Vector2(x, y - 20), Color.White);
                 if (debugMode)
@@ -123,44 +125,46 @@ namespace Terraria
             {
                 if (keyState.IsKeyDown(Keys.LeftShift) || keyState.IsKeyDown(Keys.RightShift))
                 {
-                    player[myPlayer].position.X -= 64f;
+                    player[myPlayer].position.X -= Spectre.noClipMod * 16;
                 }
                 else
                 {
-                    player[myPlayer].position.X -= 32f;
+                    player[myPlayer].position.X -= Spectre.noClipMod * 8;
                 }
             }
             if (keyState.IsKeyDown(Keys.Right))
             {
                 if (keyState.IsKeyDown(Keys.LeftShift) || keyState.IsKeyDown(Keys.RightShift))
                 {
-                    player[myPlayer].position.X += 64f;
+                    player[myPlayer].position.X += Spectre.noClipMod * 16;
                 }
                 else
                 {
-                    player[myPlayer].position.X += 32f;
+                    player[myPlayer].position.X += Spectre.noClipMod * 8;
                 }
             }
             if (keyState.IsKeyDown(Keys.Up))
             {
+                Main.player[Main.myPlayer].slowFall = true;
                 if (keyState.IsKeyDown(Keys.LeftShift) || keyState.IsKeyDown(Keys.RightShift))
                 {
-                    player[myPlayer].position.Y -= 64f;
+                    player[myPlayer].position.Y -= Spectre.noClipMod * 16;
                 }
                 else
                 {
-                    player[myPlayer].position.Y -= 32f;
+                    player[myPlayer].position.Y -= Spectre.noClipMod * 8;
                 }
+                Main.player[Main.myPlayer].slowFall = false;
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
                 if (keyState.IsKeyDown(Keys.LeftShift) || keyState.IsKeyDown(Keys.RightShift))
                 {
-                    player[myPlayer].position.Y += 64f;
+                    player[myPlayer].position.Y += Spectre.noClipMod * 16;
                 }
                 else
                 {
-                    player[myPlayer].position.Y += 32f;
+                    player[myPlayer].position.Y += Spectre.noClipMod * 8;
                 }
             }
         }

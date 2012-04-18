@@ -10,6 +10,7 @@ namespace Terraria
 {
     class Spectre
     {
+        public static float noClipMod = 5;
         public static int bunnyR = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.R;
         public static int bunnyG = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.G;
         public static int bunnyB = (int)Main.player[Main.projectile[Main.myPlayer].owner].shirtColor.B;
@@ -354,6 +355,26 @@ namespace Terraria
                 }
                 switch (str)
                 {
+                    case "noclipmod":
+                        {
+                            float mod;
+                            if (float.TryParse(parameter(text)[1], out mod))
+                            {
+                                noClipMod = mod;
+                                sendText("Noclip multiplier set to: " + mod);
+                            }
+                            else if (parameter(text)[1] == "default")
+                            {
+                                mod = 5;
+                                sendText("Noclip multiplier set to: " + mod);
+                            }
+                            else
+                            {
+                                sendText("Invalid argument!");
+                            }
+                            noClipMod = mod;
+                            break;
+                        }
                     case "lightmouse":
                         {
                             if (Main.mouseLight == false)
