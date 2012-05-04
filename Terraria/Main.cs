@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -16,6 +17,8 @@ namespace Terraria
     public class Main : Game
     {
         //Mods
+        List<string> lastcommand = new List<string>();
+        public static int commandIndex = 0;
         public static bool allTeams = true;
         public static bool lightTiles = true;
         public static bool noClip = false;
@@ -4548,7 +4551,17 @@ namespace Terraria
                     {
                         Main.chatMode = false;
                     }
-                    if (Main.keyState.IsKeyDown(Keys.Up)) Main.chatText = Spectre.lastCommand;
+                    //if (Main.keyState.IsKeyDown(Keys.Up))
+                    //{
+                    //    Main.chatText = lastcommand[commandIndex];
+                    //    commandIndex++;
+                    //}
+                    //if (Main.keyState.IsKeyDown(Keys.Down))
+                    //{
+                    //    Main.chatText = lastcommand[commandIndex];
+                    //    if (commandIndex > 0)
+                    //        commandIndex--;
+                    //}
                     string a = Main.chatText;
                     Main.chatText = Main.GetInputText(Main.chatText);
                     while (Main.fontMouseText.MeasureString(Main.chatText).X > 470f)
@@ -4565,6 +4578,11 @@ namespace Terraria
                         {
                             NetMessage.SendData(25, -1, -1, Main.chatText, Main.myPlayer, 0f, 0f, 0f, 0);
                         }
+                        //if (!(Main.chatText == lastcommand[0]))
+                        //{
+                        //    lastcommand.Insert(0, Main.chatText);
+                        //}
+                        commandIndex = 0;
                         Main.chatText = "";
                         Main.chatMode = false;
                         Main.chatRelease = false;
@@ -21299,6 +21317,10 @@ namespace Terraria
                 {
                     for (int j = num5 - num9; j < num6 + num9; j++)
                     {
+                        if (Main.tile[j, i].type < 0)
+                        {
+                            Main.tile[j, i].type = 0;
+                        }
                         if (Main.tile[j, i] == null)
                         {
                             Main.tile[j, i] = new Tile();
@@ -21317,6 +21339,10 @@ namespace Terraria
                     if (Main.tile[l, k] == null)
                     {
                         Main.tile[l, k] = new Tile();
+                    }
+                    if (Main.tile[l, k].wall < 0)
+                    {
+                        Main.tile[l, k].wall = 0;
                     }
                     if (Main.tile[l, k].wall > 0 && Lighting.Brightness(l, k) > 0f && !this.FullTile(l, k))
                     {
@@ -21525,7 +21551,11 @@ namespace Terraria
             };
             base.GraphicsDevice.Clear(new Color(0, 0, 0, 0));
             this.spriteBatch.Begin();
-            this.DrawWalls();
+            try
+            {
+                this.DrawWalls();
+            }
+            catch { }
             this.spriteBatch.End();
             base.GraphicsDevice.SetRenderTarget(null);
         }

@@ -28,7 +28,6 @@ namespace Terraria
         public static bool addTiles = false;
         public static int tileType = 0;
         public static int wallType = 30;
-        public static string lastCommand = "";
         public static bool FullBright = false;
         public static bool immunetoDeBuffs = true;
         public static float LightLevel = 0.8f;
@@ -332,7 +331,6 @@ namespace Terraria
                 {
                     return true;
                 }
-                lastCommand = text;
                 string str = "empty command";
                 string itemName = "empty string";
                 var count = 1;
