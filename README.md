@@ -1,1 +1,1 @@
-To use you must first copy your content files from C:\program files\steam\steamapps\common\terraria to the binaries folder.
+Spectre is my personal Terraria mod that I primarily use to moerate and administrate my server.

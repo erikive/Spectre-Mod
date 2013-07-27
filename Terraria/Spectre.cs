@@ -540,16 +540,17 @@ namespace Terraria
                                 case "shoot":
                                 case "s":
                                     {
-                                        int shoot = int.Parse(parameter(text)[2]);
-                                        if (Main.projectile[shoot].name == null)
+                                        int s = int.Parse(parameter(text)[2]);
+                                        if (Main.projectile[s].name == null)
                                         {
                                             sendText("No such item.");
+                                            break;
                                         }
                                         else
                                         {
-                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = shoot;
-                                            sendText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[shoot].name + "s.");
+                                            Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot = s;
                                         }
+                                        sendText(Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " now fires " + Main.projectile[s].name + "s.");
                                         break;
                                     }
                                 case "autoreuse":
@@ -563,13 +564,14 @@ namespace Terraria
                                         {
                                             Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
                                         }
+                                        sendText("Autoreuse for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " set to " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse);
                                         break;
                                     }
                                 case "nocolide":
                                 case "penetrate":
                                 case "pierce":
                                     {
-                                        if (/*Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot.ToString() != null && */Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide)
+                                        if (Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide)
                                         {
                                             Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = false;
                                         }
@@ -577,6 +579,12 @@ namespace Terraria
                                         {
                                             Main.projectile[Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].shoot].tileCollide = true;
                                         }
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        sendText("Invalid syntax");
+                                        sendText("/s [usetime, shootspeed, damage, shoot, autoreuse, nocolide]");
                                         break;
                                     }
                             }
@@ -659,6 +667,7 @@ namespace Terraria
                             {
                                 Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse = true;
                             }
+                            sendText("Autoreuse for " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].name + " set to " + Main.player[Main.myPlayer].inventory[Main.player[Main.myPlayer].selectedItem].autoReuse);
                             break;
                         }
 
