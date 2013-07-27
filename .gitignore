@@ -11,6 +11,7 @@
 client-crashlog.txt
 bin/Release/
 obj/
+content/
 
 # Packages #
 ############
