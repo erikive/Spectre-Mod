@@ -38,6 +38,7 @@ namespace Terraria
         public static int selSize = 1;
         public static int chatSpam = 1;
         public static int speedBonus = 1;
+        public static bool itemInfo = true;
 
         public static Color GetStatusColor(bool test)
         {
@@ -64,27 +65,6 @@ namespace Terraria
                 chatSpam++;
             }
         }
-
-        //public static void onKeys(Microsoft.Xna.Framework.Input.Keys[] pressedKeys)
-        //{
-        //    if ((Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) && (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.V)))
-        //    {
-        //        Main.chatText = Clipboard.GetText(TextDataFormat.Text);
-        //        NetMessage.SendData(0x19, -1, -1, (Clipboard.GetText(TextDataFormat.Text)), 0xff, 0f, 0f, 0f, 0);
-        //    }
-        //    if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F6))
-        //    {
-        //        if (Main.noClip)
-        //        {
-        //            Main.noClip = false;
-        //        }
-        //        else
-        //        {
-        //            Main.noClip = true;
-        //        }
-        //        previousKeys = pressedKeys;
-        //    }
-        //}
 
         private static int IndexOfOccurence(string s, string match, int occurence)
         {
